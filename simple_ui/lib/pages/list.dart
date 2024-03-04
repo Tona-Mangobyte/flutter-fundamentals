@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ListViewPage extends StatefulWidget {
+class ListViewPage extends StatelessWidget {
   const ListViewPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
-
-  @override
-  State<ListViewPage> createState() => _ListViewPageState();
-}
-
-class _ListViewPageState extends State<ListViewPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +13,7 @@ class _ListViewPageState extends State<ListViewPage> {
             .of(context)
             .colorScheme
             .inversePrimary,
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Center(
         child: _buildList(),

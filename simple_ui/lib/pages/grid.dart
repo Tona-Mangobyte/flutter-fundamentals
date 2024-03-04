@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 
-class GridViewPage extends StatefulWidget {
+class GridViewPage extends StatelessWidget {
   const GridViewPage({super.key, required this.title});
 
   final String title;
-
-  @override
-  State<GridViewPage> createState() => _GridViewPageState();
-}
-
-class _GridViewPageState extends State<GridViewPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +13,7 @@ class _GridViewPageState extends State<GridViewPage> {
             .of(context)
             .colorScheme
             .inversePrimary,
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Center(
         child: _buildGrid(),
@@ -39,5 +33,4 @@ class _GridViewPageState extends State<GridViewPage> {
   // a list when objects have a predictable naming pattern.
   List<Container> _buildGridTileList(int count) => List.generate(
       count, (i) => Container(child: Image.asset('images/pic$i.jpg')));
-
 }
