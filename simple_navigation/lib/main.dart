@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simple_navigation/screens/month/list.dart';
+import 'package:simple_navigation/screens/simple_route.dart';
+import 'package:simple_navigation/screens/simple_tab.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
+      /*theme: ThemeData(
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see
@@ -31,8 +33,16 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+      ),*/
+      theme: ThemeData(
+        tabBarTheme: const TabBarTheme(
+          labelColor: Colors.white,
+        ),
+        primarySwatch: Colors.blue,
       ),
-      home: ListMonthScreen(),
+      // home: ListMonthScreen(),
+      // home: const SimpleManageRoute(),
+      home: SimpleTabController(),
     );
   }
 }
