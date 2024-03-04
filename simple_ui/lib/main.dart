@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:simple_ui/pages/grid.dart';
+import 'package:simple_ui/pages/grid2.dart';
 import 'package:simple_ui/pages/home.dart';
 import 'package:simple_ui/pages/list.dart';
 import 'package:simple_ui/pages/list2.dart';
+import 'package:simple_ui/pages/list3.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,8 +39,10 @@ class MyApp extends StatelessWidget {
       ),
       // home: const HomePage(title: 'Flutter Demo Home Page'),
       // home: const GridViewPage(title: 'Grid View'),
-      home: const ListViewPage(title: 'List View'),
+      // home: const ListViewPage(title: 'List View'),
+      // home: const SliverGridPage(title: 'Grid View'),
       // home: const SliverListPage(title: 'List View'),
+      home: const ListViewActionPage(),
     );
   }
 }
