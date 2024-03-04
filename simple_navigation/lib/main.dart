@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simple_navigation/screens/month/list.dart';
+import 'package:simple_navigation/screens/simple_bottom.dart';
+import 'package:simple_navigation/screens/simple_drawer.dart';
 import 'package:simple_navigation/screens/simple_route.dart';
 import 'package:simple_navigation/screens/simple_tab.dart';
 
@@ -42,7 +44,9 @@ class MyApp extends StatelessWidget {
       ),
       // home: ListMonthScreen(),
       // home: const SimpleManageRoute(),
-      home: SimpleTabController(),
+      // home: SimpleTabController(),
+      // home: BottomNavigationBarScreen(),
+      home: NavigationDrawerScreen(),
     );
   }
 }
