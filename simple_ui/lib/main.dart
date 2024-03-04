@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:simple_ui/pages/grid.dart';
 import 'package:simple_ui/pages/home.dart';
+import 'package:simple_ui/pages/list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,21 +34,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'Flutter Demo Home Page'),
-      /*home: const CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          backgroundColor: CupertinoColors.systemGrey,
-          middle: Text('Flutter layout demo'),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('Hello World'),
-            ],
-          ),
-        ),
-      ),*/
+      // home: const HomePage(title: 'Flutter Demo Home Page'),
+      // home: const GridViewPage(title: 'Grid View'),
+      home: const ListViewPage(title: 'List View'),
     );
   }
 }

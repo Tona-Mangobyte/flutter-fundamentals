@@ -34,12 +34,12 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         // child: Text('Hello World'),
-        child: buildRating(),
+        child: _buildImageColumn(),
       ),
     );
   }
 
-  Widget buildImages() {
+  Widget _buildImages() {
     final simple1 = Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
       child: simple3,
     );
   }
-  Widget buildRating() =>
+  Widget _buildRating() =>
       Container(
         padding: const EdgeInsets.all(20),
         child: Row(
@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       );
-  Widget buildUI() {
+  Widget _buildUI() {
     final stars = Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -212,4 +212,35 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  Widget _buildImageColumn() {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.black26,
+      ),
+      child: Column(
+        children: [
+          _buildImageRow(1),
+          _buildImageRow(3),
+        ],
+      ),
+    );
+  }
+  Widget _buildDecoratedImage(int imageIndex) => Expanded(
+    child: Container(
+      decoration: BoxDecoration(
+        border: Border.all(width: 10, color: Colors.black38),
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+      ),
+      margin: const EdgeInsets.all(4),
+      child: Image.asset('images/pic$imageIndex.jpg'),
+    ),
+  );
+
+  Widget _buildImageRow(int imageIndex) => Row(
+    children: [
+      _buildDecoratedImage(imageIndex),
+      _buildDecoratedImage(imageIndex + 1),
+    ],
+  );
 }
