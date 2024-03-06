@@ -81,7 +81,7 @@ class ProfilePage extends StatelessWidget {
               ),
               subtitle: const Text('developer at mango-byte'),
               leading: Icon(
-                Icons.restaurant_menu,
+                Icons.account_box,
                 color: Colors.blue[500],
               ),
             ),
