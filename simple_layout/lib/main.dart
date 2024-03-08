@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:simple_layout/screens/list_product2_screen.dart';
+import 'package:simple_layout/screens/list_product_screen.dart';
 import 'package:simple_layout/screens/profile_screen.dart';
 
 void main() {
@@ -18,7 +20,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
         useMaterial3: true,
       ),
-      home: const ProfileScreen(),
+      // home: const ProfileScreen(),
+      // home: const ListProductScreen(),
+      home: const ListProduct2Screen(),
     );
   }
 }
