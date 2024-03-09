@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_layout/screens/food/list_food.dart';
 import 'package:simple_layout/screens/list_product2_screen.dart';
 import 'package:simple_layout/screens/list_product_screen.dart';
 import 'package:simple_layout/screens/profile_screen.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       ),
       // home: const ProfileScreen(),
       // home: const ListProductScreen(),
-      home: const ListProduct2Screen(),
+      // home: const ListProduct2Screen(),
+      home: const ListFoodScreen(),
     );
   }
 }
