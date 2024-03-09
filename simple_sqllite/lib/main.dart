@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:simple_sqllite/screens/home_screen.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 import 'dart:async';
+import 'dart:io';
 
 void main() {
   runApp(const MyApp());
@@ -24,10 +26,10 @@ class _MyAppState extends State<MyApp> {
     var databasesPath = await getDatabasesPath();
     String path = join(databasesPath, 'demo.db');
 
-// Delete the database
-    await deleteDatabase(path);
+    // Delete the database
+    // await deleteDatabase(path);
 
-// open the database
+    // open the database
     Database database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
           // When creating the db, create the table
