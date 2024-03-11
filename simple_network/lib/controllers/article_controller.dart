@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
 
 import '../services/article_service.dart';
 import '../states/article_state.dart';
@@ -16,12 +17,24 @@ class ArticleController {
   late ArticleState _articleState;
 
   Future<void> getArticles() async {
-    _articleState.setLoading(true);
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _articleState.setLoading(true);
+    });
     await Future.delayed(const Duration(seconds: 5));
     print('ArticleController getArticles called');
     _articleService.getArticles().then((articles) => {
-      _articleState.addArticles(articles)
+      if(_articleState.hasListeners) {
+        _articleState.addArticles(articles),
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
+          _articleState.setLoading(false);
+        })
+      }
+      // _articleState.addArticles(articles)
     });
-    _articleState.setLoading(false);
+  }
+
+  void dispose() {
+    print('ArticleController dispose called');
+    // _articleState.dispose();
   }
 }
