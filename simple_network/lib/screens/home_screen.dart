@@ -42,8 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
       itemBuilder: (context, index) {
         return Card(
           child: ListTile(
-            title: Text(_articles[index].title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            subtitle: Text(_articles[index].body),
+            title: Text(_articles[index].title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            subtitle: Text(_articles[index].body, maxLines: 3, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
           ),
         );
       },
