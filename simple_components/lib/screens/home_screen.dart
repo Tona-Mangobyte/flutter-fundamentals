@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_components/screens/food/list_food_screen.dart';
 import 'package:simple_components/screens/simple_components_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _navigationScreens = [
     const SimpleComponents(),
     const Center(child: Text('Page: Products')),
-    const Center(child: Text('Demo: Favorites')),
+    const ListFoodScreen(),
     const Center(child: Text('Demo: List')),
   ];
 
@@ -39,8 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.shopify), label: 'Products'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: 'Favorites'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Foods'),
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'),
         ],
       ),
