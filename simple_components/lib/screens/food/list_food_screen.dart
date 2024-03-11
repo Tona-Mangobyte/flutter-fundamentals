@@ -14,52 +14,64 @@ class ListFoodScreen extends StatefulWidget {
 }
 
 class _ListFoodScreenState extends State<ListFoodScreen> {
-  List<FoodModel> foods = [
-    FoodModel(
-      name: "Idli",
-      description: "With spicy Chutney",
-      cal: "65",
-      price: "30.00",
-      image: "assets/images/idli.jpeg",
-    ),
-    FoodModel(
-      name: "Idiyappam",
-      description: "With spicy Motton curry",
-      cal: "75",
-      price: "50.00",
-      image: "assets/images/idiyapam.jpeg",
-    ),
-    FoodModel(
-      name: "Ven Pongal",
-      description: "With Sambar and Chutney",
-      cal: "85",
-      price: "40.00",
-      image: "assets/images/pongal.png",
-    ),
-    FoodModel(
-      name: "Dosa",
-      description: "With spicy Chutney",
-      cal: "65",
-      price: "60.00",
-      image: "assets/images/dosa.png",
-    ),
-    FoodModel(
-      name: "Full Meals",
-      description: "With five Side-Dish",
-      cal: "128",
-      price: "110.00",
-      image: "assets/images/meals.png",
-    ),
-    FoodModel(
-      name: "Paniyaram",
-      description: "With spicy Chutneyy",
-      cal: "43",
-      price: "35.00",
-      image: "assets/images/paniyaram.png",
-    ),
-  ];
+  late List<FoodModel> _foods;
 
+  @override
+  void initState() {
+    super.initState();
+    _foods = initFoods();
+  }
+
+  List<FoodModel> initFoods() {
+    return [
+      FoodModel(
+        name: "Idli",
+        description: "With spicy Chutney",
+        cal: "65",
+        price: "30.00",
+        image: "assets/images/idli.jpeg",
+      ),
+      FoodModel(
+        name: "Idiyappam",
+        description: "With spicy Motton curry",
+        cal: "75",
+        price: "50.00",
+        image: "assets/images/idiyapam.jpeg",
+      ),
+      FoodModel(
+        name: "Ven Pongal",
+        description: "With Sambar and Chutney",
+        cal: "85",
+        price: "40.00",
+        image: "assets/images/pongal.png",
+      ),
+      FoodModel(
+        name: "Dosa",
+        description: "With spicy Chutney",
+        cal: "65",
+        price: "60.00",
+        image: "assets/images/dosa.png",
+      ),
+      FoodModel(
+        name: "Full Meals",
+        description: "With five Side-Dish",
+        cal: "128",
+        price: "110.00",
+        image: "assets/images/meals.png",
+      ),
+      FoodModel(
+        name: "Paniyaram",
+        description: "With spicy Chutneyy",
+        cal: "43",
+        price: "35.00",
+        image: "assets/images/paniyaram.png",
+      ),
+    ];
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final counts = _foods.length;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -75,7 +87,15 @@ class _ListFoodScreenState extends State<ListFoodScreen> {
               const SizedBox(
                 height: 20,
               ),
-              const Filter(),
+              Filter(
+                onChanged: (value) {
+                  print('Filter value: $value');
+                  setState(() {
+                    _foods = _foods.where((element) => element.name.startsWith(value)).toList();
+                    print('Filter count: ${_foods.length}');
+                  });
+                },
+              ),
               const SizedBox(
                 height: 25,
               ),
@@ -86,23 +106,17 @@ class _ListFoodScreenState extends State<ListFoodScreen> {
                   mainAxisSpacing: 15,
                   crossAxisSpacing: 15,
                   children: [
-                    const Center(
-                      child: Text(
-                        "Found 80 results",
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: Center(
+                        child: Text(
+                          'Found $counts results',
+                          style: const TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                    for (var i = 0; i < foods.length; i++)
-                      InkWell(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FoodDetailScreen(
-                                  foodData: foods[i],
-                                )),
-                          ),
-                          child: FoodCard(foodData: foods[i]))
+                    ..._buildFoodList(),
                   ],
                 ),
               ),
@@ -114,5 +128,18 @@ class _ListFoodScreenState extends State<ListFoodScreen> {
         ),
       ),
     );
+  }
+
+  List<Widget> _buildFoodList() {
+    return _foods.map((e) => InkWell(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FoodDetailScreen(
+            foodData: e,
+          )),
+      ),
+      child: FoodCard(foodData: e),
+    )).toList();
   }
 }

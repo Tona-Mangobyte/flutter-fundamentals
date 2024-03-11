@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class Filter extends StatelessWidget {
   const Filter({
     super.key,
+    this.onChanged,
   });
+  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class Filter extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
+              onChanged: onChanged,
             ),
           ),
           const SizedBox(
