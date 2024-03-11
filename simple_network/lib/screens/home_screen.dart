@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_network/services/article_service.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_network/widgets/loading.dart';
+import '../controllers/article_controller.dart';
 import '../models/article.dart';
+import '../states/article_state.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,19 +15,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  late ArticleService _articleService;
-  final List<Article> _articles = [];
+  late ArticleController _articleController;
 
   @override
   void initState() {
     super.initState();
-    _articleService = ArticleService();
     print('HomeScreen initState called');
-    _articleService.getArticles().then((articles) => {
-      setState(() {
-        _articles.addAll(articles);
-      })
-    });
+    _articleController = ArticleController(context: context);
+    _articleController.getArticles();
   }
 
   @override
@@ -32,18 +31,32 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Simple Network'),
       ),
-      body: _buildArticleList(),
+      body: _buildArticleListProvider(),
     );
   }
 
-  Widget _buildArticleList() {
+  Widget _buildArticleListProvider() {
+    return Consumer<ArticleState>(
+      builder: (context, articleState, child) {
+        if (articleState.loading) {
+          return const Center(
+            // child: Loading(),
+            child: Text("Loading...", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.deepPurple)),
+          );
+        }
+        return _buildArticleList(articleState.articles);
+      },
+    );
+  }
+
+  Widget _buildArticleList(List<Article> articles) {
     return ListView.builder(
-      itemCount: _articles.length,
+      itemCount: articles.length,
       itemBuilder: (context, index) {
         return Card(
           child: ListTile(
-            title: Text(_articles[index].title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            subtitle: Text(_articles[index].body, maxLines: 3, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+            title: Text(articles[index].title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            subtitle: Text(articles[index].body, maxLines: 3, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
           ),
         );
       },
