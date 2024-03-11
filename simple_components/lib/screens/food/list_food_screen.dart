@@ -14,7 +14,8 @@ class ListFoodScreen extends StatefulWidget {
 }
 
 class _ListFoodScreenState extends State<ListFoodScreen> {
-  late List<FoodModel> _foods;
+  List<FoodModel> _foods;
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -88,9 +89,25 @@ class _ListFoodScreenState extends State<ListFoodScreen> {
                 height: 20,
               ),
               Filter(
-                onChanged: (value) {
+                /*onChanged: (value) {
                   print('Filter value: $value');
                   setState(() {
+                    if (value.isEmpty) {
+                      _foods = initFoods();
+                      return;
+                    }
+                    _foods = _foods.where((element) => element.name.startsWith(value)).toList();
+                    print('Filter count: ${_foods.length}');
+                  });
+                },*/
+                controller: _controller,
+                onFilter: (value) {
+                  print('Filter value: $value');
+                  setState(() {
+                    if (value.isEmpty) {
+                      _foods = initFoods();
+                      return;
+                    }
                     _foods = _foods.where((element) => element.name.startsWith(value)).toList();
                     print('Filter count: ${_foods.length}');
                   });

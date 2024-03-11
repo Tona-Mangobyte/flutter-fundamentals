@@ -4,8 +4,12 @@ class Filter extends StatelessWidget {
   const Filter({
     super.key,
     this.onChanged,
+    this.onFilter,
+    required this.controller,
   });
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onFilter;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +20,7 @@ class Filter extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: TextField(
+              controller: controller,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
                 hintText: "Search Food",
@@ -49,18 +54,24 @@ class Filter extends StatelessWidget {
           const SizedBox(
             width: 15,
           ),
-          Container(
-            width: 48.00,
-            height: 48.00,
-            decoration: BoxDecoration(
-              color: Colors.amber[400],
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+          GestureDetector(
+            onTap: () {
+              print('Filter');
+              onFilter!(controller!.text);
+            },
+            child: Container(
+              width: 48.00,
+              height: 48.00,
+              decoration: BoxDecoration(
+                color: Colors.amber[400],
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              child: const Icon(
+                Icons.filter_list,
+                size: 25,
+              ),
             ),
-            child: const Icon(
-              Icons.filter_list,
-              size: 25,
-            ),
-          ),
+          )
         ],
       ),
     );
