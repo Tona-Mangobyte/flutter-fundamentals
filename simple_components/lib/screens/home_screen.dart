@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../widgets/simple_components.dart';
+import 'package:simple_components/screens/simple_components_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,9 +18,9 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  late List<Widget> _navigationScreens = [
+  final List<Widget> _navigationScreens = [
     const SimpleComponents(),
-    const Center(child: Text('Page: News')),
+    const Center(child: Text('Page: Products')),
     const Center(child: Text('Demo: Favorites')),
     const Center(child: Text('Demo: List')),
   ];
@@ -30,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Screen"),
+        title: const Text("Home Screen"),
       ),
       body: _navigationScreens[_itemSelected],
       bottomNavigationBar: BottomNavigationBar(
@@ -39,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.info), label: 'News'),
+          BottomNavigationBarItem(icon: Icon(Icons.shopify), label: 'Products'),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite), label: 'Favorites'),
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'),
