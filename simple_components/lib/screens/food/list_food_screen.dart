@@ -14,7 +14,7 @@ class ListFoodScreen extends StatefulWidget {
 }
 
 class _ListFoodScreenState extends State<ListFoodScreen> {
-  List<FoodModel> _foods;
+  late List<FoodModel> _foods;
   final TextEditingController _controller = TextEditingController();
 
   @override
