@@ -25,10 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
       // physics: CustomScrollPhysics(velocityFactor: 0.5),
       slivers: <Widget>[
         SliverAppBar(
-          // title: Text('Simple SliverAppBar'),
-          pinned: true, // This makes the AppBar sticky
-          floating: false, // This should be false for a sticky AppBar
-          snap: false, // This should be false for a sticky AppBar
+          /*title: Text('SliverAppBar', style: TextStyle(color: Colors.blue)),
+          centerTitle: true,*/
+          //pinned: true, // This makes the AppBar sticky
+          floating: true, // This should be false for a sticky AppBar
+          snap: true, // This should be false for a sticky AppBar
           expandedHeight: 200,
           flexibleSpace: FlexibleSpaceBar(
             background: Image.asset('assets/images/pic6.jpg',fit: BoxFit.cover),
