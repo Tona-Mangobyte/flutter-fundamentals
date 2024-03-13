@@ -17,8 +17,6 @@ class Translator {
     final String jsonContent = await rootBundle
         .loadString('assets/lang/localization_${locale.languageCode}.json');
     _values = json.decode(jsonContent);
-    print(jsonContent);
-    print('Translator is load');
     return translator;
   }
   String getString(String key) {

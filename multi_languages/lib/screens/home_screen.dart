@@ -1,43 +1,48 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_languages/utils/share_preference_util.dart';
+import 'package:multi_languages/utils/string_keys.dart';
+import 'package:multi_languages/utils/string_util.dart';
+import 'package:multi_languages/localization/application.dart';
+
 import '../localization/translator_delegate.dart';
-import '../localization/application.dart';
-import '../utils/share_preference_util.dart';
-import '../utils/string_keys.dart';
-import '../utils/string_util.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  late TranslatorDelegate _newLocaleDelegate = const TranslatorDelegate(newLocale: null);
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  String _locale = 'en';
 
   @override
   void initState() {
+    _setLocale();
     super.initState();
-    SharePreferencesUtil.getLocalePrefs().then((code) {
-      setState(() {
-        _newLocaleDelegate = TranslatorDelegate(newLocale: Locale(code));
-      });
-    });
-    application.onLocaleChanged = onLocaleChange;
+  }
+
+  void _setLocale() async {
+    try {
+      _locale = await SharePreferencesUtil.getLocalePrefs();
+      SharePreferencesUtil.setLocalePrefs(_locale);
+    } catch (e) {
+      SharePreferencesUtil.setLocalePrefs(_locale);
+    }
   }
 
   Future onLocaleChange(Locale locale) async {
     SharePreferencesUtil.setLocalePrefs(locale.languageCode);
     setState(() {
-      _newLocaleDelegate = TranslatorDelegate(newLocale: locale);
+      TranslatorDelegate(newLocale: locale);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: const Text('Home Screen'),
       ),
@@ -102,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   Widget _buildAlertDialog() {
     return AlertDialog(
-      title: const Text('Select language'),
+      title: Text(StringUtil.getString(context, StringKeys.languages)),
       alignment: Alignment.bottomCenter,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -159,6 +164,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Navigator.pop(context, 'Khmer');
                       print('Khmer');
+                      // application.onLocaleChanged(const Locale('kh'));
+                      onLocaleChange(const Locale('kh'));
                     },
                     child: const Text('Khmer'),
                   ),
@@ -167,6 +174,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Navigator.pop(context, 'English');
                       print('English');
+                      // application.onLocaleChanged(const Locale('en'));
+                      onLocaleChange(const Locale('en'));
                     },
                     child: const Text('English'),
                   ),
