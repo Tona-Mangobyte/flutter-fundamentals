@@ -80,6 +80,7 @@ class LocationListItem extends StatelessWidget {
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none,
             ),
           ),
           Text(
@@ -87,6 +88,7 @@ class LocationListItem extends StatelessWidget {
             style: const TextStyle(
               color: Colors.white,
               fontSize: 14,
+              decoration: TextDecoration.none,
             ),
           ),
         ],
