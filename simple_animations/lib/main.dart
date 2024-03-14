@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_animations/screens/expandable_fab_screen.dart';
 import 'package:simple_animations/screens/home_screen.dart';
 import 'package:simple_animations/screens/list_screen.dart';
 import 'package:simple_animations/screens/menu_screen.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
       ),
       // home: const HomeScreen(),
       // home: const ListScreen(),
-      home: const MenuScreen(),
+      // home: const MenuScreen(),
+      home: const ExampleExpandableFabScreen(),
     );
   }
 }
